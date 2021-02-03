@@ -23,27 +23,17 @@
 
 
     //ミリ秒の表示ではなく、分とか秒に直すための関数, 他のところからも呼び出すので別関数として作る
-    //計算方法として135200ミリ秒経過したとしてそれを分とか秒に直すと -> 02:15:200
     function updateTimetText(){
         
-        //h(分) = 135200 / 60000ミリ秒で割った数の商　-> 2分
         var hour = Math.floor(elapsedTime / 3600000);
 
-        //m(分) = 135200 / 60000ミリ秒で割った数の商　-> 2分
         var minute = Math.floor(elapsedTime / 60000);
 
-        //s(秒) = 135200 % 60000ミリ秒で / 1000 (ミリ秒なので1000で割ってやる) -> 15秒
         var second = Math.floor(elapsedTime % 60000 / 1000);
 
-        //ms(ミリ秒) = 135200ミリ秒を % 1000ミリ秒で割った数の余り
         var millisecond = elapsedTime % 1000;
 
-
-        //HTML 上で表示の際の桁数を固定する　例）3 => 03　、 12 -> 012
-        //javascriptでは文字列数列を連結すると文字列になる
-        //文字列の末尾2桁を表示したいのでsliceで負の値(-2)引数で渡してやる。
-        // minute = ('0' + minute).slice(-1); 
-        // second = ('0' + second).slice(-1);
+        //文字列の末尾1桁を表示したいのでsliceで負の値(-1)引数で渡してやる。
         millisecond = ('0' + millisecond).slice(-1);
 
         //HTMLのid　timer部分に表示させる　
@@ -105,3 +95,23 @@
 
     });
 })();
+
+//スタートを押した場合の挙動
+function clickBtn1(){
+	document.getElementById("start").setAttribute("disabled", true);
+	document.getElementById("stop").removeAttribute("disabled");
+	document.getElementById("reset").removeAttribute("disabled");
+}
+
+//ストップを押した場合の挙動
+function clickBtn2(){
+		document.getElementById("start").removeAttribute("disabled");
+		document.getElementById("stop").setAttribute("disabled", true);
+}
+
+//リセットを押した場合の挙動
+function clickBtn3(){
+		document.getElementById("start").removeAttribute("disabled");
+		document.getElementById("stop").setAttribute("disabled", true);
+		document.getElementById("reset").setAttribute("disabled", true);
+}
